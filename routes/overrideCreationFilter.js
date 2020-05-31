@@ -22,7 +22,7 @@ var dbConfig = {
   }
 }
 
-/* READ Price_MetaExpense Data */
+/* READ Price_OverrideCreationFilter Data */
 router.get('/', (req, res, next) => {
     // connect to your database
     sql.connect(dbConfig, (err) => {
@@ -33,7 +33,7 @@ router.get('/', (req, res, next) => {
         var request = new sql.Request();
            
         // query to the database and get the records
-        request.query('SELECT * FROM Price_MetaExpense', (err, result) => {
+        request.query('SELECT * FROM Price_OverrideCreationFilter', (err, result) => {
             
             if (err) console.log(err)
 
@@ -44,7 +44,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-/* CREATE Price_MetaExpense Data */
+/* CREATE Price_OverrideCreationFilter Data */
 router.post('/', (req, res) => {
   var data = req.body;
 
@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
       // create Request object
       var request = new sql.Request();
 
-      var sqlQuery = `INSERT INTO Price_MetaExpense (Source, SiteID, Carrier, TripType, MetaExpense, Route, BookingDate, BookingEndDate, DepartureDate, DepartureEndDate) VALUES ('${data.Source}', '${data.SiteID}', '${data.Carrier}', '${data.TripType}', '${data.MetaExpense}', '${data.Route}', '${data.BookingDate}', '${data.BookingEndDate}', '${data.DepartureDate}', '${data.DepartureEndDate}')`;
+      var sqlQuery = `INSERT INTO Price_OverrideCreationFilter (CarrierCode, OriginCode, DestinationCode, Priority) VALUES ('${data.CarrierCode}', '${data.OriginCode}', '${data.DestinationCode}', '${data.Priority}')`;
 
       // query to the database and submit the new record
       request.query(sqlQuery, (err, result) => {
@@ -70,9 +70,11 @@ router.post('/', (req, res) => {
   });
 });
 
-/* UPDATE Price_MetaExpense Data */
+/* UPDATE Price_OverrideCreationFilter Data */
 router.put('/:id', (req, res) => {
   var data = req.body;
+
+  console.log(data)
 
   // connect to your database
   sql.connect(dbConfig, (err) => {
@@ -82,7 +84,7 @@ router.put('/:id', (req, res) => {
       // create Request object
       var request = new sql.Request();
 
-      var sqlQuery = `UPDATE Price_MetaExpense SET Source = '${data.Source}', SiteID = '${data.SiteID}', Carrier = '${data.Carrier}', TripType = '${data.TripType}', MetaExpense = '${data.MetaExpense}', Route = '${data.Route}', BookingDate = '${data.BookingDate}', BookingEndDate = '${data.BookingEndDate}', DepartureDate = '${data.DepartureDate}', DepartureEndDate = '${data.DepartureEndDate}' WHERE ID = ${req.params.id}`;
+      var sqlQuery = `UPDATE Price_OverrideCreationFilter SET CarrierCode = '${data.CarrierCode}', OriginCode = '${data.OriginCode}', DestinationCode = '${data.DestinationCode}', Priority = '${data.Priority}' WHERE Id = ${req.params.id}`;
 
       // query to the database and set the record
       request.query(sqlQuery, (err, result) => {
@@ -97,7 +99,7 @@ router.put('/:id', (req, res) => {
   
 });
 
-/* DELETE Price_MetaExpense Data */
+/* DELETE Price_OverrideCreationFilter Data */
 router.delete('/:id', (req, res) => {
 
   // connect to your database
@@ -109,8 +111,8 @@ router.delete('/:id', (req, res) => {
       var request = new sql.Request();
 
       // create query to handle single and mutliple deletes
-      var sqlQuery = `DELETE FROM Price_MetaExpense WHERE ID IN (${req.params.id})`;
-      console.log(sqlQuery);
+      var sqlQuery = `DELETE FROM Price_OverrideCreationFilter WHERE Id IN (${req.params.id})`;
+      
       // query to the database and delete the record(s)
       request.query(sqlQuery, (err, result) => {
 
