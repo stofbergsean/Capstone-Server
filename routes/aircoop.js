@@ -19,8 +19,8 @@ router.get('/', async (req, res, next) => {
 
   } catch (err) {
 
-    // Use express async next function to handle errors
-    next(err);
+    console.log(err);
+    next(err);        // Use express async next function to handle errors
 
   }
 });
@@ -43,8 +43,8 @@ router.post('/', async (req, res, next) => {
 
   } catch (err) {
 
-    // Use express async next function to handle errors
-    next(err);
+    console.log(err);
+    next(err);        // Use express async next function to handle errors
 
   }
 });
@@ -67,8 +67,8 @@ router.put('/:id', async (req, res, next) => {
 
   } catch (err) {
 
-    // Use express async next function to handle errors
-    next(err);
+    console.log(err);
+    next(err);        // Use express async next function to handle errors
 
   }
 });
@@ -90,8 +90,8 @@ router.delete('/:id', async (req, res, next) => {
 
   } catch (err) {
 
-    // Use express async next function to handle errors
-    next(err);
+    console.log(err);
+    next(err);        // Use express async next function to handle errors
 
   }
 });
