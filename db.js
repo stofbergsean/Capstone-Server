@@ -1,7 +1,7 @@
 const sql = require('mssql')
 
 // Database configurations
-var dbConfig = {
+const dbConfig = {
     server: 'localhost',
     port: 1433,
     user: 'SA',
