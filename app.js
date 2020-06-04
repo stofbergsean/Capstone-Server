@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set routes
-app.use('/aircoops', aircoopRouter);
+app.use('/aircoop', aircoopRouter);
 app.use('/backendcommission', backEndCommissionRouter);
 app.use('/frontendcommission', frontEndCommissionRouter);
 app.use('/metaexpense', metaExpenseRouter);

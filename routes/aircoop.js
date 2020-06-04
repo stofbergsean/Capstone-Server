@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     // Construct mssql query
     var sqlQuery = 'SELECT * FROM Price_AIRCoop';
 
-    // Get wait for response then send to frontend
+    // Wait for response then send to frontend
     const response = await request.query(sqlQuery);
     res.status(200).json(response.recordset);
 
