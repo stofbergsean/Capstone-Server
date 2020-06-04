@@ -10,7 +10,6 @@ const backEndCommissionRouter = require('./routes/backEndCommission');
 const frontEndCommissionRouter = require('./routes/frontEndCommission');
 const metaExpenseRouter = require('./routes/metaExpense');
 const overrideCreationFilterRouter = require('./routes/overrideCreationFilter');
-const usersRouter = require('./routes/users');
 
 const app = express();
 app.use(cors());
@@ -39,7 +38,6 @@ app.use('/backendcommission', backEndCommissionRouter);
 app.use('/frontendcommission', frontEndCommissionRouter);
 app.use('/metaexpense', metaExpenseRouter);
 app.use('/overridecreationfilter', overrideCreationFilterRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
