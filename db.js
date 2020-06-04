@@ -1,4 +1,6 @@
 const sql = require('mssql')
+
+// Database configurations
 var dbConfig = {
     server: 'localhost',
     port: 1433,
@@ -19,6 +21,7 @@ var dbConfig = {
     }
   }
 
+// Database pool for use accross routes
 const pool = new sql.ConnectionPool(dbConfig);
 const poolPromise = pool
     .connect()

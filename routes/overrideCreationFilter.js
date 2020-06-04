@@ -1,5 +1,5 @@
 const express = require('express');
-const { poolPromise } = require('../db.js');
+const { poolPromise } = require('../db.js');  // Import database connection pool
 const router = express.Router();
 
 /* READ Price_OverrideCreationFilter Data */
