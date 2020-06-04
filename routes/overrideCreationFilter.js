@@ -1,5 +1,6 @@
 const express = require('express');
 const sql = require('mssql');
+const { poolPromise } = require('../db.js');
 const router = express.Router();
 
 var dbConfig = {
@@ -45,29 +46,27 @@ router.get('/', (req, res, next) => {
 });
 
 /* CREATE Price_OverrideCreationFilter Data */
-router.post('/', (req, res) => {
-  var data = req.body;
+router.post('/', async (req, res, next) => {
+  try {
 
-  // connect to your database
-  sql.connect(dbConfig, (err) => {
+    // Create request with mssql database server pool
+    const pool = await poolPromise; 
+    const request = pool.request();
 
-      if (err) console.log(err);
+    // Construct mssql query
+    var data = req.body;
+    var sqlQuery = `INSERT INTO Price_OverrideCreationFilter (CarrierCode, OriginCode, DestinationCode, Priority) VALUES ('${data.CarrierCode}', '${data.OriginCode}', '${data.DestinationCode}', '${data.Priority}')`;
 
-      // create Request object
-      var request = new sql.Request();
+    // Wait for response then send to frontend
+    const response = await request.query(sqlQuery);
+    res.status(200).json(response.recordset);
 
-      var sqlQuery = `INSERT INTO Price_OverrideCreationFilter (CarrierCode, OriginCode, DestinationCode, Priority) VALUES ('${data.CarrierCode}', '${data.OriginCode}', '${data.DestinationCode}', '${data.Priority}')`;
+  } catch (err) {
 
-      // query to the database and submit the new record
-      request.query(sqlQuery, (err, result) => {
+    // Use express async next function to handle errors
+    next(err);
 
-          if (err) console.log(err)
-
-          // send records as a response
-          res.send(JSON.stringify(result, null, 4));
-
-      });
-  });
+  }
 });
 
 /* UPDATE Price_OverrideCreationFilter Data */
