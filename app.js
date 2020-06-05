@@ -1,5 +1,4 @@
 const express = require('express');             // Async req/res
-const createError = require('http-errors');     // Error handler
 const path = require('path');                   
 const cookieParser = require('cookie-parser');  // Parse cookie header
 const logger = require('morgan');               // Logs requests in console
